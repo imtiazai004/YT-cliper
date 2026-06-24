@@ -203,11 +203,36 @@ def create_zip_download(clips: list):
 
 
 # ── PAGE CONFIG ───────────────────────────────────────────────────────────────
-st.set_page_config(page_title="AI Video Clipper", page_icon="🎬", layout="wide")
+st.set_page_config(
+    page_title="AI Video Clipper - AI Soft Tech Solution",
+    page_icon="🎬",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# ── Custom CSS for branding ────────────────────────────────────────────────────
+st.markdown("""
+<style>
+    [data-testid="stSidebarNav"] {background-color: #0066CC;}
+    .stTitle {color: #0066CC;}
+    h1, h2, h3 {color: #0066CC;}
+</style>
+""", unsafe_allow_html=True)
+
+# ── HEADER with LOGO ───────────────────────────────────────────────────────────
+col1, col2, col3 = st.columns([1, 3, 1])
+with col2:
+    if os.path.exists("logo.png"):
+        st.image("logo.png", width=300, use_column_width=False)
+    st.markdown("<h1 style='text-align: center; color: #0066CC;'>AI Video Clipper</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color: #666;'>By AI Soft Tech Solution</p>", unsafe_allow_html=True)
+
+st.divider()
 
 # ── SIDEBAR SETTINGS ───────────────────────────────────────────────────────────
 with st.sidebar:
-    st.header("⚙️ Settings")
+    st.markdown("### ⚙️ Settings")
+    st.markdown("**AI Soft Tech Solution**")
 
     gemini_key = st.text_input(
         "Google Gemini API Key",
@@ -220,12 +245,14 @@ with st.sidebar:
     else:
         st.warning("⚠️ Add API key for auto-detection")
 
-st.title("🎬 AI Video Clipper")
-st.caption("Paste YouTube link → Auto-detect viral moments → Download clips")
+st.markdown("### 📊 Paste YouTube link → Auto-detect viral moments → Download clips")
 
 if not check_ffmpeg():
-    st.error("❌ ffmpeg not found! Install from: https://ffmpeg.org/download.html")
+    st.error("❌ **FFmpeg not found!** Install from: https://ffmpeg.org/download.html")
     st.stop()
+
+st.markdown("---")
+st.markdown("<p style='text-align: center; font-size: 14px; color: #999;'>Powered by AI Soft Tech Solution © 2024</p>", unsafe_allow_html=True)
 
 # ── SESSION STATE ──────────────────────────────────────────────────────────────
 defaults = {
