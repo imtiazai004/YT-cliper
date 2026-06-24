@@ -83,21 +83,31 @@ def get_available_formats(url: str):
 def download_video(url: str, quality_id: str = None):
     ydl_opts = {
         "outtmpl": os.path.join(DOWNLOAD_DIR, "%(title).60s.%(ext)s"),
-        "quiet": True,
-        "no_warnings": True,
+        "quiet": False,
+        "no_warnings": False,
+        "merge_output_format": "mp4",
     }
 
     if quality_id:
-        ydl_opts["format"] = quality_id
+        ydl_opts["format"] = f"{quality_id}/best[ext=mp4]/best"
     else:
         ydl_opts["format"] = "best[ext=mp4]/best[height<=720]/best"
 
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info = ydl.extract_info(url, download=True)
-        filename = ydl.prepare_filename(info)
-        base = os.path.splitext(filename)[0]
-        path = base + ".mp4"
-        return path, info.get("title", "video"), info.get("duration", 0)
+    try:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(url, download=True)
+            if not info:
+                raise Exception("Failed to extract video info")
+
+            filename = ydl.prepare_filename(info)
+            if not filename:
+                raise Exception("Could not prepare filename")
+
+            base = os.path.splitext(filename)[0]
+            path = base + ".mp4"
+            return path, info.get("title", "video"), info.get("duration", 0)
+    except Exception as e:
+        raise Exception(f"Download error: {str(e)}")
 
 
 def detect_viral_moments(transcript: str, video_duration: int, gemini_key: str):
