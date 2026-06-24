@@ -225,7 +225,8 @@ with col2:
     if os.path.exists("logo.png"):
         st.image("logo.png", width=300, use_column_width=False)
     st.markdown("<h1 style='text-align: center; color: #0066CC;'>AI Video Clipper</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color: #666;'>By AI Soft Tech Solution</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color: #666; font-size: 16px;'><b>by Imtiaz Ahmad</b></p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='text-align: center; color: #0066CC;'><a href='https://aisofttechsolution.com' target='_blank' style='text-decoration: none; color: #0066CC;'>🌐 aisofttechsolution.com</a></p>", unsafe_allow_html=True)
 
 st.divider()
 
@@ -252,7 +253,7 @@ if not check_ffmpeg():
     st.stop()
 
 st.markdown("---")
-st.markdown("<p style='text-align: center; font-size: 14px; color: #999;'>Powered by AI Soft Tech Solution © 2024</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; font-size: 12px; color: #999;'>AI Video Clipper by Imtiaz Ahmad | <a href='https://aisofttechsolution.com' target='_blank' style='color: #0066CC; text-decoration: none;'>aisofttechsolution.com</a></p>", unsafe_allow_html=True)
 
 # ── SESSION STATE ──────────────────────────────────────────────────────────────
 defaults = {
