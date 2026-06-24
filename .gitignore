@@ -1,0 +1,7 @@
+downloads/
+clips/
+*.mp4
+*.mov
+__pycache__/
+*.pyc
+.streamlit/
